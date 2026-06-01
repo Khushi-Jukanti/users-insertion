@@ -1,0 +1,67 @@
+[
+  {
+    "user": {
+      "username": "KAISM_27/2023",
+      "password": "ZEOFRH"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_98/2024",
+      "password": "NPYPJI"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_32/2022",
+      "password": "TOPQGG"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_ 8/2022",
+      "password": "DROXKT"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_277/2022",
+      "password": "BWFOHG"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  }
+]

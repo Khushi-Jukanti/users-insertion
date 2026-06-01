@@ -1,0 +1,15 @@
+[
+  {
+    "batch": 1,
+    "users": [
+      "69e71c2d05fdee8845610ccd"
+    ],
+    "response": {
+      "total": 1,
+      "success": 1,
+      "skipped": 0,
+      "failed": 0,
+      "errors": []
+    }
+  }
+]

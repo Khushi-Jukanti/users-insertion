@@ -1,0 +1,27 @@
+[
+  {
+    "batch": 1,
+    "users": [
+      "69e71c2d05fdee8845610cbf",
+      "69e71c2d05fdee8845610cc0",
+      "69e71c2d05fdee8845610cc1",
+      "69e71c2d05fdee8845610cc2",
+      "69e71c2d05fdee8845610cc3",
+      "69e71c2d05fdee8845610cc4",
+      "69e71c2d05fdee8845610cc5",
+      "69e71c2d05fdee8845610cc6",
+      "69e71c2d05fdee8845610cc7",
+      "69e71c2d05fdee8845610cc8",
+      "69e71c2d05fdee8845610cc9",
+      "69e71c2d05fdee8845610cca",
+      "69e71c2d05fdee8845610ccb"
+    ],
+    "response": {
+      "total": 13,
+      "success": 13,
+      "skipped": 0,
+      "failed": 0,
+      "errors": []
+    }
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "user": {
+      "username": "KAISM_280/2022",
+      "password": "OXSUIL"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_75/2020",
+      "password": "BKGDAM"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  }
+]

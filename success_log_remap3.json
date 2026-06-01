@@ -1,0 +1,18 @@
+[
+  {
+    "batch": 1,
+    "users": [
+      "69f0550b53ead49659d19fc5",
+      "69f0550b53ead49659d19fc6",
+      "69f0550b53ead49659d19fc7",
+      "69f0550b53ead49659d19fc8"
+    ],
+    "response": {
+      "total": 4,
+      "success": 4,
+      "skipped": 0,
+      "failed": 0,
+      "errors": []
+    }
+  }
+]

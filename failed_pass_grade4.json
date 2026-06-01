@@ -1,0 +1,15 @@
+[
+  {
+    "user": {
+      "username": "KAISM_35/2022",
+      "password": "ZGNNYF"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  }
+]

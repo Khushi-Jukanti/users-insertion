@@ -1,0 +1,41 @@
+[
+  {
+    "user": {
+      "username": "KAISM_143/2020",
+      "password": "JNUROQ"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_2326009",
+      "password": "NDLICD"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  },
+  {
+    "user": {
+      "username": "KAISM_118/2023",
+      "password": "CUHROM"
+    },
+    "error": {
+      "statusCode": 422,
+      "message": "Invalid student ID",
+      "status": "error",
+      "response": {},
+      "error": true
+    }
+  }
+]

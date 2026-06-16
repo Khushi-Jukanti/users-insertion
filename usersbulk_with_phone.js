@@ -121,10 +121,7 @@ function buildEmail(row, username) {
     return rawEmail.toLowerCase();
   }
 
-  // The production collection has a unique index on `email`, so multiple
-  // `null` values will fail. Use a deterministic placeholder for students
-  // who do not have a real email address.
-  return `${username.toLowerCase()}@students.ekluvya.local`;
+  return null;
 }
 
 function buildPhone(row) {
@@ -159,8 +156,33 @@ function buildPhone(row) {
   return null;
 }
 
+async function ensureEmailIndexAllowsNulls() {
+  const indexes = await User.collection.indexes();
+  const emailIndex = indexes.find(index => index.name === "email_1");
+  const expectedPartialFilter = { email: { $type: "string" } };
+
+  if (
+    emailIndex &&
+    (
+      emailIndex.unique !== true ||
+      JSON.stringify(emailIndex.partialFilterExpression) !== JSON.stringify(expectedPartialFilter)
+    )
+  ) {
+    await User.collection.dropIndex("email_1");
+  }
+
+  await User.collection.createIndex(
+    { email: 1 },
+    {
+      unique: true,
+      partialFilterExpression: expectedPartialFilter
+    }
+  );
+}
+
 async function run() {
   await mongoose.connect(MONGO_URI);
+  await ensureEmailIndexAllowsNulls();
 
   const workbook = XLSX.readFile(path.join(__dirname, "kaism_students.xlsx"), {
     cellDates: true
@@ -319,7 +341,7 @@ async function run() {
     csv += `${row.firstname},${row.username},${row.school_code},${row.user_id}\n`;
   });
 
-  fs.writeFileSync(path.join(__dirname, "user_mapping_SR5.csv"), csv);
+  fs.writeFileSync(path.join(__dirname, "user_mapping_Sloka_Tukkuguda.csv"), csv);
 
   // 🔥 EXPORT FAILURES
   if (failedRows.length > 0) {

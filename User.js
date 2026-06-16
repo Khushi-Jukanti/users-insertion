@@ -333,7 +333,7 @@
 
 
 'use strict';
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Users = new Schema(
@@ -358,7 +358,6 @@ const Users = new Schema(
         },
         email: {
             type: String,
-            index: true,
             default: null,
         },
         school_code: {
@@ -703,6 +702,16 @@ const Users = new Schema(
 );
 
 Users.index(
+    { email: 1 },
+    {
+        unique: true,
+        partialFilterExpression: {
+            email: { $type: 'string' }
+        }
+    }
+);
+
+Users.index(
     { receipt_no: 1 },
     {
         unique: true,
@@ -712,4 +721,4 @@ Users.index(
     }
 );
 
-export default mongoose.model('users', Users);
+module.exports = mongoose.model('users', Users);

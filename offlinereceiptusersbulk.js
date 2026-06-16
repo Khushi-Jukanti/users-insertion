@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 
-const MONGO_URI = "mongodb://monekluvyausr:TVqtQ161DGvlrT3bqXCmdGXrp@13.235.17.54:27017/mongekluvyastgdb";
-// const MONGO_URI = "mongodb://ekluvyamongo:GRWqLDESFT816lrsxG@13.127.118.60:27017/ekluvya?authSource=ekluvya&readPreference=primary&directConnection=true&ssl=false";
+// const MONGO_URI = "mongodb://monekluvyausr:TVqtQ161DGvlrT3bqXCmdGXrp@13.235.17.54:27017/mongekluvyastgdb";
+const MONGO_URI = "mongodb://ekluvyamongo:GRWqLDESFT816lrsxG@13.127.118.60:27017/ekluvya?authSource=ekluvya&readPreference=primary&directConnection=true&ssl=false";
 const INPUT_FILE = process.argv[2] || "offline_receipt_users.xlsx";
 
 const UserSchema = new mongoose.Schema(
@@ -357,7 +357,7 @@ async function run() {
   ];
 
   fs.writeFileSync(
-    path.join(__dirname, "/mapping/offline_receipt_user_mapping.csv"),
+    path.join(__dirname, "/mapping/offline_receipt_user_mapping1.csv"),
     `${successCsvRows.join("\n")}\n`
   );
 

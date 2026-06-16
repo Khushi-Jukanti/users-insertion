@@ -180,12 +180,16 @@ function buildPhone(row) {
   return null;
 }
 
-function buildUsername(schoolCode, sequence) {
-  return `${schoolCode}_STAFF_${String(sequence).padStart(3, "0")}`;
+function buildUsername(schoolCode, admissionNumber) {
+  return `${schoolCode}_${admissionNumber}`;
 }
 
-function buildTempPassword(schoolCode, sequence) {
-  return `${schoolCode}@${String(sequence).padStart(3, "0")}`;
+function buildTempPassword(row, schoolCode, admissionNumber) {
+  const rawPassword = normalizeValue(
+    getRowValue(row, ["password", "Password"])
+  );
+
+  return rawPassword || `${schoolCode}@${admissionNumber}`;
 }
 
 function escapeCsv(value) {
@@ -213,12 +217,14 @@ async function run() {
   const failedRows = [];
   const seenUsernames = new Set();
   const seenEmails = new Set();
-  const schoolCounters = new Map();
 
   for (const row of data) {
     try {
       const schoolCode = normalizeValue(
         getRowValue(row, ["school_code", "School Code"])
+      );
+      const admissionNumber = normalizeValue(
+        getRowValue(row, ["admission_number", "Admission Number", "admission no", "admission_no"])
       );
       const firstName = normalizeValue(
         getRowValue(row, ["first_name", "First Name", "firstname", "name"])
@@ -226,9 +232,14 @@ async function run() {
       const email = normalizeValue(
         getRowValue(row, ["email", "Email", "email_id", "Email ID", "E-mail"])
       )?.toLowerCase();
+      const dobValue = getRowValue(row, ["dob", "DOB", "date_of_birth", "Date of Birth"]);
 
       if (!schoolCode) {
         throw new Error("school_code missing");
+      }
+
+      if (!admissionNumber) {
+        throw new Error("admission_number missing");
       }
 
       if (!firstName) {
@@ -245,11 +256,8 @@ async function run() {
 
       seenEmails.add(email);
 
-      const nextSequence = (schoolCounters.get(schoolCode) || 0) + 1;
-      schoolCounters.set(schoolCode, nextSequence);
-
-      const username = buildUsername(schoolCode, nextSequence);
-      const tempPassword = buildTempPassword(schoolCode, nextSequence);
+      const username = buildUsername(schoolCode, admissionNumber);
+      const tempPassword = buildTempPassword(row, schoolCode, admissionNumber);
       const hashedPassword = await bcrypt.hash(tempPassword, 10);
 
       if (seenUsernames.has(username)) {
@@ -263,22 +271,26 @@ async function run() {
         user_type: "b2b",
 
         first_name: firstName,
-        last_name: null,
+        last_name: normalizeValue(
+          getRowValue(row, ["last_name", "Last Name", "lastname"])
+        ),
 
         email,
-        phone: null,
+        phone: buildPhone(row),
 
         school_code: schoolCode,
-        branch: null,
-        class: null,
-        section: null,
-        preparing_for: null,
+        branch: normalizeValue(getRowValue(row, ["branch", "Branch"])),
+        class: normalizeValue(getRowValue(row, ["class", "Class"])),
+        section: normalizeValue(getRowValue(row, ["section", "Section"])),
+        preparing_for: normalizeValue(
+          getRowValue(row, ["preparing_for", "Preparing For"])
+        ),
 
         password: hashedPassword,
         must_change_password: 1,
 
-        dob: null,
-        gender: null,
+        dob: dobValue ? parseDOB(dobValue) : null,
+        gender: mapGender(getRowValue(row, ["gender", "Gender"])),
 
         // CRITICAL DEFAULTS (backup even if schema exists)
         profile_picture: "",
@@ -322,6 +334,8 @@ async function run() {
     } catch (err) {
       failedRows.push({
         username: normalizeValue(
+          getRowValue(row, ["admission_number", "Admission Number", "admission no", "admission_no"])
+        ) || normalizeValue(
           getRowValue(row, ["email", "Email", "email_id", "Email ID", "E-mail"])
         ) || "UNKNOWN",
         error: err.message
@@ -395,7 +409,7 @@ async function run() {
     csv += `${escapeCsv(row.firstname)},${escapeCsv(row.email)},${escapeCsv(row.username)},${escapeCsv(row.temp_password)},${escapeCsv(row.school_code)},${escapeCsv(row.user_id)}\n`;
   });
 
-  fs.writeFileSync(path.join(__dirname, "user_mapping_SR3.csv"), csv);
+  fs.writeFileSync(path.join(__dirname, "MahendraTeachers2.csv"), csv);
 
   // EXPORT FAILURES
   if (failedRows.length > 0) {

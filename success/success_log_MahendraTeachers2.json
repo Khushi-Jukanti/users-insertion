@@ -1,0 +1,24 @@
+[
+  {
+    "batch": 1,
+    "users": [
+      "6a26abc56923cecff7bf205b",
+      "6a26abc56923cecff7bf205c",
+      "6a26abc56923cecff7bf205d",
+      "6a26abc56923cecff7bf205e",
+      "6a26abc56923cecff7bf205f",
+      "6a26abc56923cecff7bf2060",
+      "6a26abc56923cecff7bf2061",
+      "6a26abc56923cecff7bf2062",
+      "6a26abc56923cecff7bf2063",
+      "6a26abc56923cecff7bf2064"
+    ],
+    "response": {
+      "total": 10,
+      "success": 10,
+      "skipped": 0,
+      "failed": 0,
+      "errors": []
+    }
+  }
+]

@@ -151,11 +151,11 @@ async function run() {
   fs.mkdirSync(SUCCESS_DIR, { recursive: true });
   fs.mkdirSync(FAILED_DIR, { recursive: true });
   fs.writeFileSync(
-    path.join(SUCCESS_DIR, "success_log_Sloka_Tukkuguda.json"),
+    path.join(SUCCESS_DIR, "success_log_Sloka_Teachers_Tukkuguda.json"),
     JSON.stringify(successLog, null, 2)
   );
   fs.writeFileSync(
-    path.join(FAILED_DIR, "failed_log_Sloka_Tukkuguda.json"),
+    path.join(FAILED_DIR, "failed_log_Sloka_Teachers_Tukkuguda.json"),
     JSON.stringify(failedLog, null, 2)
   );
 

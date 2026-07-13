@@ -114,6 +114,16 @@ function normalizeValue(value) {
   return trimmed === "" ? null : trimmed;
 }
 
+function getRowValue(row, keys) {
+  for (const key of keys) {
+    if (Object.prototype.hasOwnProperty.call(row, key)) {
+      return row[key];
+    }
+  }
+
+  return null;
+}
+
 function buildEmail(row, username) {
   const rawEmail = normalizeValue(row.email);
 
@@ -236,6 +246,8 @@ async function run() {
         phone: buildPhone(row),
 
         school_code: schoolCode,
+        school_name: normalizeValue(getRowValue(row, ["school name", "school_name", "School Name", "schoolName"])),
+        school_address: normalizeValue(getRowValue(row, ["school address", "school_address", "School Address", "schoolAddress"])),
         branch: normalizeValue(row.branch),
         class: normalizeValue(row.class),
         section: normalizeValue(row.section),
@@ -341,7 +353,7 @@ async function run() {
     csv += `${row.firstname},${row.username},${row.school_code},${row.user_id}\n`;
   });
 
-  fs.writeFileSync(path.join(__dirname, "user_mapping_Sloka_Tukkuguda.csv"), csv);
+  fs.writeFileSync(path.join(__dirname, "user_mapping_Sloka_Teachers_Tukkuguda.csv"), csv);
 
   // 🔥 EXPORT FAILURES
   if (failedRows.length > 0) {
